@@ -1,16 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTransactions } from './api';
-import { calculatePoints } from './CalculatePoints';
+// import axios from 'axios';
+import { calculatePoints } from '../../utility/CalculatePoints';
 
 const RewardSummary = () => {
   const [, setTransactions] = useState([]);
   const [rewards, setRewards] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchTransactions().then((data) => {
-      setTransactions(data);
-      calculateRewards(data);
-    });
+    // Fetch data from the JSON file
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/mock_data/transactions.json');
+        const result = await response.json();
+        setTransactions(result);
+        calculateRewards(result);
+      } catch (error) {
+        setError(error);
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+
+    // axios.get('/mock_data/transactions.json')
+    //   .then(response => {
+    //     setTransactions(response.data);
+    //     calculateRewards(response.data);
+    //   })
+    //   .catch(error => {
+    //     setError(error);
+    //   });
   }, []);
 
   const calculateRewards = (transactions) => {
@@ -24,6 +44,8 @@ const RewardSummary = () => {
     });
     setRewards(rewards);
   };
+
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>

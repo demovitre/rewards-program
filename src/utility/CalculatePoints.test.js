@@ -1,5 +1,5 @@
 // CalculatePoints.test.js
-import { calculatePoints } from './CalculatePoints';
+import { calculatePoints } from './CalculatePoints'
 
 test('calculatePoints correctly calculates points', () => {
   expect(calculatePoints(120)).toBe(90);
