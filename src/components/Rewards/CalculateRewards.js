@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
 import { calculatePoints } from '../../utility/CalculatePoints';
 
 const RewardSummary = () => {
@@ -17,20 +16,10 @@ const RewardSummary = () => {
         calculateRewards(result);
       } catch (error) {
         setError(error);
-        console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-
-    // axios.get('/mock_data/transactions.json')
-    //   .then(response => {
-    //     setTransactions(response.data);
-    //     calculateRewards(response.data);
-    //   })
-    //   .catch(error => {
-    //     setError(error);
-    //   });
   }, []);
 
   const calculateRewards = (transactions) => {

@@ -22,14 +22,10 @@ test('renders customer rewards', async () => {
     render(<RewardSummary />);
 
     await waitFor(() => {
-        expect(screen.getByText((content, element) => {
-            console.log(element.textContent)
-            return element.textContent.includes('Month 8: 195 points');
-        })).toBeInTheDocument();
-
-        expect(screen.getByText((content, element) => {
-            return element.textContent.includes('Month 8: 250 points');
-        })).toBeInTheDocument();
+        expect(screen.getByText('Customer 1')).toBeInTheDocument();
+        expect(screen.getByText('Month 8: 115 points')).toBeInTheDocument();
+        expect(screen.getByText('Customer 2')).toBeInTheDocument();
+        expect(screen.getByText('Month 8: 250 points')).toBeInTheDocument();
     });
 });
 
